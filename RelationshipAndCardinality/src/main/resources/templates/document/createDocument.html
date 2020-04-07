@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http:www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Update Car</title>
+</head>
+<body>
+	<div class="container">
+		<div class="title">
+			<h1>Create Document</h1>
+		</div>
+		<div class="form">
+			<form th:object="${document}" th:action="@{/document/save}" method="POST">
+				<label>NUMBER:</label>
+				<input type="text" id="number" th:field="*{number}" autofocus="autofocus" placeholder="Input the doc. number..." required />
+				<button type="submit">SAVE</button>
+				<a th:href="@{/document/list}">CANCEL</a>
+			</form>
+		</div>
+	</div>
+</body>
+</html>
