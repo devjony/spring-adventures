@@ -24,8 +24,8 @@ public class Car implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(nullable = false, unique = true, length = 6)
-	private String plate;
+	@Column(nullable = false)
+	private String model;
 	
 	public int getId() {
 		return id;
@@ -35,11 +35,11 @@ public class Car implements Serializable {
 		this.id = id;
 	}
 	
-	public String getPlate() {
-		return plate;
+	public String getModel() {
+		return model;
 	}
 	
-	public void setPlate(String plate) {
-		this.plate = plate;
+	public void setModel(String model) {
+		this.model = model;
 	}	
 }

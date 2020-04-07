@@ -13,8 +13,8 @@
 			<form th:object="${car}" th:action="@{/car/save}" method="POST">
 				<label>ID:</label>
 				<input type="text" id="id" th:field="*{id}" readonly />
-				<label>PLATE:</label>
-				<input type="text" id="plate" th:field="*{plate}" autofocus="autofocus" placeholder="Input the plate number..." required />
+				<label>MODEL:</label>
+				<input type="text" id="model" th:field="*{model}" autofocus="autofocus" placeholder="Input the model..." required />
 				<button type="submit">SAVE</button>
 				<a th:href="@{/car/list}">CANCEL</a>
 			</form>

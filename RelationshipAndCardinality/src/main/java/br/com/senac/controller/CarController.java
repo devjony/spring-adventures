@@ -36,17 +36,17 @@ public class CarController {
 	}
 	
 	@PostMapping("/save")
-	public ModelAndView saveCar(Car car) {
+	public String saveCar(Car car) {
 		service.save(car);
 		
-		return listCars();
+		return "redirect:/car/list";
 	}
 	
 	@GetMapping("/delete/{id}")
-	public ModelAndView deleteCar(@PathVariable("id") Integer id) throws ObjectNotFoundException {
+	public String deleteCar(@PathVariable("id") Integer id) throws ObjectNotFoundException {
 		service.delete(id);
 		
-		return listCars();
+		return "redirect:/car/list";
 	}
 	
 	@GetMapping("/update/{id}")
@@ -58,9 +58,9 @@ public class CarController {
 	}
 	
 	@PostMapping("/update")
-	public ModelAndView update(Car car) throws ObjectNotFoundException {
+	public String update(Car car) throws ObjectNotFoundException {
 		service.edit(car);
 		
-		return listCars();
+		return "redirect:/list";
 	}
 }

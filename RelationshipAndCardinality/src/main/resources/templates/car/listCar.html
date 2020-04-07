@@ -15,14 +15,14 @@
 					<thead>
 						<tr>
 							<th>ID</th>
-							<th>PLATE</th>
+							<th>MODEL</th>
 							<th>OPTIONS</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr th:each="car : ${cars}">
 							<td th:text="${car.id}"></td>
-							<td th:text="${car.plate}"></td>
+							<td th:text="${car.model}"></td>
 							<td>
 								<a th:href="@{/car/update/{id}(id=${car.id})}">EDIT</a>
 								<a th:href="@{/car/delete/{id}(id=${car.id})}">DELETE</a>

@@ -36,17 +36,17 @@ public class DocumentController {
 	}
 	
 	@PostMapping("/save")
-	public ModelAndView saveDocument(Document document) {
+	public String saveDocument(Document document) {
 		service.save(document);
 		
-		return listDocuments();
+		return "redirect:/document/list";
 	}
 	
 	@GetMapping("/delete/{id}")
-	public ModelAndView deleteDocument(@PathVariable("id") Integer id) throws ObjectNotFoundException {
+	public String deleteDocument(@PathVariable("id") Integer id) throws ObjectNotFoundException {
 		service.delete(id);
 		
-		return listDocuments();
+		return "redirect:/document/list";
 	}
 	
 	@GetMapping("/update/{id}")
@@ -58,9 +58,9 @@ public class DocumentController {
 	}
 	
 	@PostMapping("/update")
-	public ModelAndView update(Document document) throws ObjectNotFoundException {
+	public String update(Document document) throws ObjectNotFoundException {
 		service.edit(document);
 		
-		return listDocuments();
+		return "redirect:/document/list";
 	}
 }

@@ -37,7 +37,7 @@ public class CarService {
 	
 	public Car edit(Car car) throws ObjectNotFoundException {
 		Car oldCar = search(car.getId());
-		oldCar.setPlate(car.getPlate());
+		oldCar.setModel(car.getModel());
 		
 		return save(oldCar);
 	}

@@ -23,11 +23,11 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		
 		Car car1 = new Car();
-		car1.setPlate("RPC698");
+		car1.setModel("Toyota Corolla");
 		carService.save(car1);
 		
 		Car car2 = new Car();
-		car2.setPlate("PRT995");
+		car2.setModel("New Civic");
 		carService.save(car2);
 		
 		Document doc1 = new Document();
