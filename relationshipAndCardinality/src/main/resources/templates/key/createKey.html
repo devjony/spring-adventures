@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http:www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Create Key</title>
+</head>
+<body>
+	<div class="container">
+		<div class="title">
+			<h1>Create Key</h1>
+		</div>
+		<div class="form">
+			<form th:object="${key}" th:action="@{/key/save}" method="POST">
+				<label>CODE:</label>
+				<input type="text" id="code" th:field="*{code}" autofocus="autofocus" placeholder="Input the code..." required />
+				<button type="submit">SAVE</button>
+				<a th:href="@{/key/list}">CANCEL</a>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

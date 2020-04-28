@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http:www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
-	<title>List Document</title>
+	<title>List Key</title>
 </head>
 <body>
 	<div class="container">
 		<div class="title">
-			<h1>List of Documents</h1>
+			<h1>List of Keys</h1>
 		</div>
 		<div class="form">
 			<form>
@@ -15,24 +15,24 @@
 					<thead>
 						<tr>
 							<th>ID</th>
-							<th>NUMBER</th>
-							<th>OPTIONS</th>
+							<th>CODE</th>
+							<th />
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="document : ${documents}">
-							<td th:text="${document.id}"></td>
-							<td th:text="${document.number}"></td>
+						<tr th:each="key : ${keys}">
+							<td th:text="${key.id}"></td>
+							<td th:text="${key.code}"></td>
 							<td>
-								<a th:href="@{/document/update/{id}(id=${document.id})}">EDIT</a>
-								<a th:href="@{/document/delete/{id}(id=${document.id})}">DELETE</a>
+								<a th:href="@{/key/update/{id}(id=${key.id})}">EDIT</a>
+								<a th:href="@{/key/delete/{id}(id=${key.id})}">DELETE</a>
 							</td>
 						</tr>
 					</tbody>
 					<tfoot>
 						<tr>
 							<td>
-								<a th:href="@{/document/insert}">CREATE NEW DOCUMENT</a>
+								<a th:href="@{/key/insert}">CREATE NEW KEY</a>
 							<td>
 						</tr>
 					</tfoot>

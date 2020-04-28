@@ -11,6 +11,8 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.senac.domain.Car;
 import br.com.senac.service.CarService;
 import br.com.senac.service.DocumentService;
+import br.com.senac.service.KeyService;
+import br.com.senac.service.ManufacturerService;
 import javassist.tools.rmi.ObjectNotFoundException;
 
 @Controller
@@ -22,6 +24,12 @@ public class CarController {
 	
 	@Autowired
 	DocumentService documentService;
+	
+	@Autowired
+	KeyService keyService;
+	
+	@Autowired
+	ManufacturerService manufacturerService;
 	
 	@GetMapping("/list")
 	public ModelAndView listCars() {
@@ -36,6 +44,8 @@ public class CarController {
 		ModelAndView mv = new ModelAndView("car/createCar");
 		mv.addObject("car", new Car());
 		mv.addObject("documents", documentService.searchAll());
+		mv.addObject("keys", keyService.searchAll());
+		mv.addObject("manufacturers", manufacturerService.searchAll());
 		
 		return mv;
 	}
@@ -59,6 +69,8 @@ public class CarController {
 		ModelAndView mv = new ModelAndView("car/updateCar");
 		mv.addObject("car", service.search(id));
 		mv.addObject("documents", documentService.searchAll());
+		mv.addObject("keys", keyService.searchAll());
+		mv.addObject("manufacturers", manufacturerService.searchAll());
 		
 		return mv;
 	}

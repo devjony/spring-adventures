@@ -17,6 +17,8 @@
 							<th>ID</th>
 							<th>MODEL</th>
 							<th>DOCUMENT</th>
+							<th>KEY</th>
+							<th>MANUFACTURER</th>
 							<th />
 						</tr>
 					</thead>
@@ -25,6 +27,8 @@
 							<td th:text="${car.id}"></td>
 							<td th:text="${car.model}"></td>
 							<td th:text="${car.document.number}"></td>
+							<td th:text="${car.key.code}"></td>
+							<td th:text="${car.manufacturer.name}"></td>
 							<td>
 								<a th:href="@{/car/update/{id}(id=${car.id})}">EDIT</a>
 								<a th:href="@{/car/delete/{id}(id=${car.id})}">DELETE</a>

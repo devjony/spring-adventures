@@ -6,8 +6,12 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 import br.com.senac.domain.Document;
+import br.com.senac.domain.Key;
+import br.com.senac.domain.Manufacturer;
 import br.com.senac.service.CarService;
 import br.com.senac.service.DocumentService;
+import br.com.senac.service.KeyService;
+import br.com.senac.service.ManufacturerService;
 
 @Component
 public class Init implements ApplicationListener<ContextRefreshedEvent>{
@@ -17,6 +21,12 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 	
 	@Autowired
 	DocumentService documentService;
+	
+	@Autowired
+	KeyService keyService;
+	
+	@Autowired
+	ManufacturerService manufacturerService;
 
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -36,7 +46,21 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		Document doc2 = new Document();
 		doc2.setNumber("85478965896");
 		documentService.save(doc2);
+		
+		Key key1 = new Key();
+		key1.setCode("123454");
+		keyService.save(key1);
+		
+		Key key2 = new Key();
+		key2.setCode("8889745");
+		keyService.save(key2);
+		
+		Manufacturer manu1 = new Manufacturer();
+		manu1.setName("Teste");
+		manufacturerService.save(manu1);
+		
+		Manufacturer manu2 = new Manufacturer();
+		manu2.setName("Ford");
+		manufacturerService.save(manu2);
 	}
-	
-	
 }

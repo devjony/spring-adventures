@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http:www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
-	<title>List Document</title>
+	<title>List Manufacturer</title>
 </head>
 <body>
 	<div class="container">
 		<div class="title">
-			<h1>List of Documents</h1>
+			<h1>List of Manufacturers</h1>
 		</div>
 		<div class="form">
 			<form>
@@ -15,24 +15,24 @@
 					<thead>
 						<tr>
 							<th>ID</th>
-							<th>NUMBER</th>
-							<th>OPTIONS</th>
+							<th>NAME</th>
+							<th />
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="document : ${documents}">
-							<td th:text="${document.id}"></td>
-							<td th:text="${document.number}"></td>
+						<tr th:each="manufacturer : ${manufacturers}">
+							<td th:text="${manufacturer.id}"></td>
+							<td th:text="${manufacturer.name}"></td>
 							<td>
-								<a th:href="@{/document/update/{id}(id=${document.id})}">EDIT</a>
-								<a th:href="@{/document/delete/{id}(id=${document.id})}">DELETE</a>
+								<a th:href="@{/manufacturer/update/{id}(id=${manufacturer.id})}">EDIT</a>
+								<a th:href="@{/manufacturer/delete/{id}(id=${manufacturer.id})}">DELETE</a>
 							</td>
 						</tr>
 					</tbody>
 					<tfoot>
 						<tr>
 							<td>
-								<a th:href="@{/document/insert}">CREATE NEW DOCUMENT</a>
+								<a th:href="@{/manufacturer/insert}">CREATE NEW MANUFACTURER</a>
 							<td>
 						</tr>
 					</tfoot>

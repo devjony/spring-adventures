@@ -2,21 +2,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http:www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
-	<title>Update Document</title>
+	<title>Update Manufacturer</title>
 </head>
 <body>
 	<div class="container">
 		<div class="title">
-			<h1>Update Document</h1>
+			<h1>Update Manufacturer</h1>
 		</div>
 		<div class="form">
-			<form th:object="${document}" th:action="@{/document/save}" method="POST">
+			<form th:object="${manufacturer}" th:action="@{/manufacturer/save}" method="POST">
 				<label>ID:</label>
 				<input type="text" id="id" th:field="*{id}" readonly />
-				<label>PLATE:</label>
-				<input type="text" id="number" th:field="*{number}" autofocus="autofocus" placeholder="Input the doc. number..." required />
+				<label>NAME:</label>
+				<input type="text" id="name" th:field="*{name}" autofocus="autofocus" placeholder="Input the name..." required />
 				<button type="submit">SAVE</button>
-				<a th:href="@{/document/list}">CANCEL</a>
+				<a th:href="@{/manufacturer/list}">CANCEL</a>
 			</form>
 		</div>
 	</div>

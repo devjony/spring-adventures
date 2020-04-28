@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -19,7 +20,7 @@ public class Car implements Serializable {
 	private static final long serialVersionUID = -8287238833245187065L;
 
 	public Car() {
-		// TODO Auto-generated constructor stub
+	
 	}
 	
 	@Id
@@ -32,6 +33,14 @@ public class Car implements Serializable {
 	@OneToOne
 	@JoinColumn(name = "id_document")
 	private Document document;
+	
+	@OneToOne
+	@JoinColumn(name = "id_key")
+	private Key key;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_manufacturer")
+	private Manufacturer manufacturer;
 	
 	public int getId() {
 		return id;
@@ -55,5 +64,21 @@ public class Car implements Serializable {
 	
 	public void setDocument(Document document) {
 		this.document = document;
+	}
+
+	public Key getKey() {
+		return key;
+	}
+
+	public void setKey(Key key) {
+		this.key = key;
+	}
+
+	public Manufacturer getManufacturer() {
+		return manufacturer;
+	}
+
+	public void setManufacturer(Manufacturer manufacturer) {
+		this.manufacturer = manufacturer;
 	}
 }

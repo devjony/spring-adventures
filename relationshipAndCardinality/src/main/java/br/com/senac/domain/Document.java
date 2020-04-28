@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 
 @Entity
 public class Document implements Serializable {
@@ -24,11 +22,7 @@ public class Document implements Serializable {
 	
 	@Column(unique = true, nullable = false, length = 80)
 	private String number;
-	
-	@OneToOne
-	@JoinColumn(name = "id_car")
-	private Car car;
-	
+		
 	public int getId() {
 		return id;
 	}

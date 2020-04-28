@@ -39,6 +39,8 @@ public class CarService {
 		Car oldCar = search(car.getId());
 		oldCar.setModel(car.getModel());
 		oldCar.setDocument(car.getDocument());
+		oldCar.setKey(car.getKey());
+		oldCar.setManufacturer(car.getManufacturer());
 		
 		return save(oldCar);
 	}
