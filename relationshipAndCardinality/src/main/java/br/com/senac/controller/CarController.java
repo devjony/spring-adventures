@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.senac.domain.Car;
+import br.com.senac.service.AccessoryService;
 import br.com.senac.service.CarService;
 import br.com.senac.service.DocumentService;
 import br.com.senac.service.KeyService;
@@ -31,6 +32,9 @@ public class CarController {
 	@Autowired
 	ManufacturerService manufacturerService;
 	
+	@Autowired
+	AccessoryService accessoryService;
+	
 	@GetMapping("/list")
 	public ModelAndView listCars() {
 		ModelAndView mv = new ModelAndView("car/listCar");
@@ -46,6 +50,7 @@ public class CarController {
 		mv.addObject("documents", documentService.searchAll());
 		mv.addObject("keys", keyService.searchAll());
 		mv.addObject("manufacturers", manufacturerService.searchAll());
+		mv.addObject("accessories", accessoryService.searchAll());
 		
 		return mv;
 	}
@@ -71,6 +76,7 @@ public class CarController {
 		mv.addObject("documents", documentService.searchAll());
 		mv.addObject("keys", keyService.searchAll());
 		mv.addObject("manufacturers", manufacturerService.searchAll());
+		mv.addObject("accessories", accessoryService.searchAll());
 		
 		return mv;
 	}

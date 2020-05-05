@@ -19,6 +19,7 @@
 							<th>DOCUMENT</th>
 							<th>KEY</th>
 							<th>MANUFACTURER</th>
+							<th>ACCESSORIES</th>
 							<th />
 						</tr>
 					</thead>
@@ -29,6 +30,7 @@
 							<td th:text="${car.document.number}"></td>
 							<td th:text="${car.key.code}"></td>
 							<td th:text="${car.manufacturer.name}"></td>
+							<td><span th:each="accessory : ${car.accessories}" th:text="${accessory.name + ' / '}"></span></td>
 							<td>
 								<a th:href="@{/car/update/{id}(id=${car.id})}">EDIT</a>
 								<a th:href="@{/car/delete/{id}(id=${car.id})}">DELETE</a>

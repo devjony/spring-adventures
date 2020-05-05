@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http:www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Create Accessory</title>
+</head>
+<body>
+	<div class="container">
+		<div class="title">
+			<h1>Create Accessory</h1>
+		</div>
+		<div class="form">
+			<form th:object="${accessory}" th:action="@{/accessory/save}" method="POST">
+				<label>NAME:</label>
+				<input type="text" id="name" th:field="*{name}" autofocus="autofocus" placeholder="Input the name..." required />
+				<button type="submit">SAVE</button>
+				<a th:href="@{/accessory/list}">CANCEL</a>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

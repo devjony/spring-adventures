@@ -17,12 +17,12 @@ import javassist.tools.rmi.ObjectNotFoundException;
 public class ManufacturerController {
 
 	@Autowired
-	ManufacturerService manufacturerService;
+	ManufacturerService service;
 	
 	@GetMapping("/list")
 	public ModelAndView listManufacturers() {
 		ModelAndView mv = new ModelAndView("manufacturer/listManufacturer");
-		mv.addObject("manufacturers", manufacturerService.searchAll());
+		mv.addObject("manufacturers", service.searchAll());
 		
 		return mv;
 	}
@@ -37,14 +37,14 @@ public class ManufacturerController {
 	
 	@PostMapping("/save")
 	public String saveManufacturer(Manufacturer manufacturer) {
-		manufacturerService.save(manufacturer);
+		service.save(manufacturer);
 		
 		return "redirect:/manufacturer/list";
 	}
 	
 	@GetMapping("/delete/{id}")
 	public String deleteManufacturer(@PathVariable("id") Integer id) throws ObjectNotFoundException {
-		manufacturerService.delete(id);
+		service.delete(id);
 		
 		return "redirect:/manufacturer/list";
 	}
@@ -52,14 +52,14 @@ public class ManufacturerController {
 	@GetMapping("/update/{id}")
 	public ModelAndView updateManufacturer(@PathVariable("id") Integer id) throws ObjectNotFoundException {
 		ModelAndView mv = new ModelAndView("manufacturer/updateManufacturer");
-		mv.addObject("manufacturer", manufacturerService.search(id));
+		mv.addObject("manufacturer", service.search(id));
 		
 		return mv;
 	}
 	
 	@PostMapping("/update")
 	public String update(Manufacturer manufacturer) throws ObjectNotFoundException {
-		manufacturerService.edit(manufacturer);
+		service.edit(manufacturer);
 		
 		return "redirect:/list";
 	}

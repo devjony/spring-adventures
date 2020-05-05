@@ -20,7 +20,7 @@ public class DocumentService {
 		Optional<Document> document = repoDocument.findById(id);
 		
 		return document.orElseThrow(() -> new ObjectNotFoundException(
-				"não encontrado, id: " + id + "Tipo! " + Document.class.getName()));
+				"not find, id: " + id + "Type: " + Document.class.getName()));
 	}
 	
 	public List<Document> searchAll() {

@@ -20,7 +20,7 @@ public class KeyService {
 		Optional<Key> key = repoKey.findById(id);
 		
 		return key.orElseThrow(() -> new ObjectNotFoundException(
-				"nao encontrado, id: " + id + "Tipo: " + Key.class.getName()));
+				"not find, id: " + id + "Type: " + Key.class.getName()));
 	}
 	
 	public List<Key> searchAll(){

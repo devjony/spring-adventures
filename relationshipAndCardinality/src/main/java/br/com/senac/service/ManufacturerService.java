@@ -20,7 +20,7 @@ public class ManufacturerService {
 		Optional<Manufacturer> manufacturer = repoManufacturer.findById(id);
 		
 		return manufacturer.orElseThrow(() -> new ObjectNotFoundException(
-				"nao encontrado, id: " + id + "Tipo: " + Manufacturer.class.getName()));
+				"not find, id: " + id + "Type: " + Manufacturer.class.getName()));
 	}
 	
 	public List<Manufacturer> searchAll(){

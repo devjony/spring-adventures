@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http:www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>List Accessory</title>
+</head>
+<body>
+	<div class="container">
+		<div class="title">
+			<h1>List of Accessories</h1>
+		</div>
+		<div class="form">
+			<form>
+				<table>
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>NAME</th>
+							<th />
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="accessory : ${accessories}">
+							<td th:text="${accessory.id}"></td>
+							<td th:text="${accessory.name}"></td>
+							<td>
+								<a th:href="@{/accessory/update/{id}(id=${accessory.id})}">EDIT</a>
+								<a th:href="@{/accessory/delete/{id}(id=${accessory.id})}">DELETE</a>
+							</td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr>
+							<td>
+								<a th:href="@{/accessory/insert}">CREATE NEW ACCESSORY</a>
+							<td>
+						</tr>
+					</tfoot>
+				</table>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

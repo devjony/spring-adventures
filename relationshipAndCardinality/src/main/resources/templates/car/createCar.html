@@ -13,21 +13,31 @@
 			<form th:object="${car}" th:action="@{/car/save}" method="POST">
 				<label>MODEL:</label>
 				<input type="text" id="model" th:field="*{model}" autofocus="autofocus" placeholder="Input the model..." required />
+				
 				<label>DOCUMENT:</label>
 				<select th:field="*{document}" required>
 					<option value="">Select the document...</option>
 					<option th:each="document : ${documents}" th:value="${document.id}" th:text="${document.number}" />
 				</select>
+				
 				<label>MANUFACTURER:</label>
 				<select th:field="*{manufacturer}" required>
 					<option value="">Select the manufacturer...</option>
 					<option th:each="manufacturer : ${manufacturers}" th:value="${manufacturer.id}" th:text="${manufacturer.name}" />
 				</select>
+				
 				<label>KEY:</label>
 				<select th:field="*{key}" required>
 					<option value="">Select the key...</option>
 					<option th:each="key : ${keys}" th:value="${key.id}" th:text="${key.code}" />
 				</select>
+				
+				<label>ACCESSORIES:</label>
+				<div th:each="accessory : ${accessories}">
+					<input type="checkbox" th:field="*{accessories}" th:value="${accessory.id}"/>
+					<label th:for="${('accessories')}" th:text="${accessory.name}"></label>
+				</div> 
+				 
 				<button type="submit">SAVE</button>
 				<a th:href="@{/car/list}">CANCEL</a>
 			</form>

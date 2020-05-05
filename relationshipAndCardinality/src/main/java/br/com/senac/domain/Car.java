@@ -1,6 +1,7 @@
 package br.com.senac.domain;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
@@ -41,6 +44,13 @@ public class Car implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "id_manufacturer")
 	private Manufacturer manufacturer;
+	
+	@ManyToMany
+	@JoinTable(
+			name = "car_accessory",
+			joinColumns = { @JoinColumn(name = "id") },
+			inverseJoinColumns = { @JoinColumn(name = "id_accessory") })
+	private List<Accessory> accessories;
 	
 	public int getId() {
 		return id;
@@ -80,5 +90,13 @@ public class Car implements Serializable {
 
 	public void setManufacturer(Manufacturer manufacturer) {
 		this.manufacturer = manufacturer;
+	}
+
+	public List<Accessory> getAccessories() {
+		return accessories;
+	}
+
+	public void setAccessories(List<Accessory> accessories) {
+		this.accessories = accessories;
 	}
 }
