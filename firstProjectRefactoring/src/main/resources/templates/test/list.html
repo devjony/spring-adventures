@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+	<th:block th:insert="~{fragments/index :: head/meta}" />
+	<title>List Test</title>
+	<th:block th:insert="~{fragments/index :: head/link}" />
+	<th:block th:insert="~{fragments/index :: head/script}" />
+</head>
+<body>
+	<th:block th:insert="~{fragments/index :: body/nav}" />
+	<th:block th:insert="~{fragments/index :: body/header}" />
+    <div class="container mt-5 mb-5">
+    	<h1>Listing Test Domain</h1>
+	    <table id="list" class="table table-hover">
+	        <tr>
+	            <th>ID</th>
+	            <th>Name</th>
+	            <th/>
+	        </tr>
+	        <tr th:each="testDomain: ${testDomainList}">
+	            <td th:text="${testDomain.id}"></td>
+	            <td th:text="${testDomain.name}"></td>
+	            <td>
+	            	<a th:href="@{/test/update/{id}(id=${testDomain.id})}">UPDATE</a>
+	            	<a th:href="@{/test/delete/{id}(id=${testDomain.id})}">DELETE</a>
+	            </td>
+	        </tr>
+	    </table>
+	    <a th:href="@{/test/create}"><button>CREATE NEW TEST</button></a>
+    </div>
+	<th:block th:insert="~{fragments/index :: body/footer}" />
+	<th:block th:insert="~{fragments/index :: copyright}" />
+    <th:block th:insert="~{fragments/index :: body/script}" />
+</body>
+</html>
