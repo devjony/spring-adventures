@@ -8,4 +8,6 @@ import br.com.devjony.firstprojectrefactoring.domain.StudentDomain;
 @Repository
 public interface StudentRepository extends JpaRepository<StudentDomain, Integer> {
 	
+	StudentDomain findByEmailAndPassword(String email, String password);
+	
 }

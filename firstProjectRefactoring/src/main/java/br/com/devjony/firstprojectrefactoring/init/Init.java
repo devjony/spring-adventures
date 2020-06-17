@@ -28,19 +28,27 @@ public class Init implements ApplicationListener<ContextRefreshedEvent> {
         logger.info("Starting saving mock values on database");
 
         StudentDomain student = new StudentDomain();
-        student.setName("Student Name 1");
+        student.setName("Student Name");
+        student.setEmail("student@email.com");
+        student.setPassword("1234");
         studentService.save(student);
         
         StudentDomain student2 = new StudentDomain();
         student2.setName("Student Name 2");
+        student2.setEmail("student2@email.com");
+        student2.setPassword("1234");
         studentService.save(student2);
         
         StudentDomain student3 = new StudentDomain();
         student3.setName("Student Name 3");
+        student3.setEmail("student3@email.com");
+        student3.setPassword("1234");
         studentService.save(student3);
         
         StudentDomain student4 = new StudentDomain();
         student4.setName("Student Name 4");
+        student4.setEmail("student4@email.com");
+        student4.setPassword("1234");
         studentService.save(student4);
         
         QuestionDomain question = new QuestionDomain();
