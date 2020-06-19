@@ -11,13 +11,13 @@ import br.com.devjony.firstprojectrefactoring.domain.StudentDomain;
 import br.com.devjony.firstprojectrefactoring.service.LoginService;
 
 @Controller
-@RequestMapping("/login")
+@RequestMapping
 public class LoginController {
 
 	@Autowired
 	private LoginService loginService;
 	
-	@GetMapping
+	@GetMapping("/login")
 	public ModelAndView login() {
 		ModelAndView mv = new ModelAndView("/login");
 		mv.addObject("student", new StudentDomain());
@@ -32,14 +32,14 @@ public class LoginController {
 	
 	@GetMapping("/index")
 	public ModelAndView index() {
-		ModelAndView mv = new ModelAndView("/index");
+		ModelAndView mv = new ModelAndView("/dashboard");
 		
 		return mv;
 	}
 	
 	@GetMapping("/error")
 	public ModelAndView error() {
-		ModelAndView mv = new ModelAndView("/404");
+		ModelAndView mv = new ModelAndView("/error");
 		
 		return mv;
 	}

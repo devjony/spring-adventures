@@ -57,6 +57,8 @@ public class StudentService {
     	
     	StudentDomain newStudentDomain = find(studentDomain.getId());
     	newStudentDomain.setName(studentDomain.getName());
+    	newStudentDomain.setEmail(studentDomain.getEmail());
+    	newStudentDomain.setPassword(studentDomain.getPassword());
     	
     	logger.info("Returning [StudentDomain] saved on Database");
     	return save(newStudentDomain);

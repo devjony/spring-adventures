@@ -1,52 +1,97 @@
 <!DOCTYPE html>
 <html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-	<th:block th:insert="~{fragments/index :: head/meta}" />
-	<title>Update Student</title>
-	<th:block th:insert="~{fragments/index :: head/link}" />
-	<th:block th:insert="~{fragments/index :: head/script}" />
-</head>
-<body>
-	<th:block th:insert="~{fragments/index :: body/nav}" />
-	<th:block th:insert="~{fragments/index :: body/header}" />
+<head th:replace="~{fragments/index :: head}" />
+<body id="page-top">
+	
+	<!-- Page Wrapper -->
+	<div id="wrapper">
+	
+		<!-- Sidebar -->
+		<th:block th:insert="~{fragments/index :: #accordionSidebar}" />
+		
+		<!-- Content Wrapper -->
+    	<div id="content-wrapper" class="d-flex flex-column">
+
+			<!-- Main Content -->
+			<div id="content">
+				<th:block th:insert="~{fragments/index :: .navbar}" />
+				
+				<!-- Begin Page Content -->
+        		<div class="container-fluid">
+        			
+        			<!-- Page Heading -->
+					<th:block th:insert="~{fragments/index :: heading(title='Update Student')}" />
     
-    <section th:fragment="input" class="page-section" id="contact">
-	    <div class="container">
-	        <!-- Contact Section Heading-->
-	        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Update Student</h2>
-	        <!-- Icon Divider-->
-	        <div class="divider-custom">
-	            <div class="divider-custom-line"></div>
-	            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-	            <div class="divider-custom-line"></div>
-	        </div>
-	        <!-- Contact Section Form-->
-	        <div class="row">
-	            <div class="col-lg-8 mx-auto">
-	                <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19.-->
-	                <form th:object="${studentDomain}" th:action="@{/student/update}" method="POST">
-	                    <div class="control-group">
-	                        <div class="form-group floating-label-form-group controls mb-0 pb-2">
-	                            <label>ID</label>
-								<input class="form-control" type="text" id="id" th:field="*{id}" readonly />
-	                            <label>Name</label>
-	                            <input class="form-control" th:field="*{name}" autofocus="autofocus" id="name" type="text" placeholder="Name" required="required" data-validation-required-message="Please enter your name." />
-	                            <p class="help-block text-danger"></p>
-	                        </div>
-	                    </div>
-	                    <br />
-	                    <div id="success"></div>
-	                    <div class="form-group">
-	                    	<button class="btn btn-primary btn-xl" type="submit">Update</button>
-	                    	<a th:href="@{/student#list}"><button class="btn btn-secondary btn-xl" type="button">Cancel</button></a>
-	                    </div>
-	                </form>
-	            </div>
-	        </div>
-	    </div>
-    </section>
-	<th:block th:insert="~{fragments/index :: body/footer}" />
-	<th:block th:insert="~{fragments/index :: copyright}" />
+    				<!-- Register Form -->
+    				<div class="card shadow mb-4">
+    					<div class="card-header py-3">
+    						<div class="row">
+    							<div class="col-12 my-auto">
+    								<h6 class="m-0 font-weight-bold text-primary">Updating Student Domain</h6>
+    							</div>
+    						</div>
+   						</div>
+   						<div class="container">
+	   						<div class="card-body">
+		   						<div class="row justify-content-center">
+			   						<div class="col-lg-5">
+				    					<form class="user" th:object="${studentDomain}" th:action="@{/student/update}" method="POST">
+							                <div class="form-group">
+						                    	<input type="text" th:field="*{id}" class="form-control form-control-user" readonly>
+							                </div>
+							                <div class="form-group">
+						                    	<input type="text" th:field="*{name}" class="form-control form-control-user" id="inputName" placeholder="Full Name" required>
+							                </div>
+							                <div class="form-group">
+							                	<input type="email" th:field="*{email}" class="form-control form-control-user" id="inputEmail" placeholder="Email Address" required>
+							                </div>
+							                <div class="form-group row">
+								                <div class="col-sm-6 mb-3 mb-sm-0">
+									                <input type="password" th:field="*{password}" class="form-control form-control-user" id="inputPassword" placeholder="Password" required>
+								                </div>
+								               	<div class="col-sm-6">
+									                <input type="password" class="form-control form-control-user" id="inputRepeatPassword" placeholder="Repeat Password" required>
+								                </div>
+							                </div>
+							                <hr>
+							                <div class="row">
+								                <div class="col-sm-6 mb-3 mb-sm-0">
+									                <a href="/student" th:href="@{/student}" class="btn btn-secondary btn-user btn-block">Cancel</a>
+								                </div>
+								                <div class="col-sm-6">
+									                <button type="submit" class="btn btn-primary btn-user btn-block">Register Account</button>
+								                </div>
+							                </div>
+						            	</form>
+						            </div>
+					            </div>
+				            </div>
+			            </div>
+   					</div>
+				</div>
+				<!-- /.container-fluid -->
+				
+			</div>
+			<!-- End of Main Content -->
+			
+			<!-- Footer -->
+			<th:block th:insert="~{fragments/index :: footer}" />
+			<!-- End of Footer -->
+			
+		</div>
+		<!-- End of Content Wrapper -->
+		
+	</div>
+	<!-- End of Page Wrapper -->
+	
+	<!-- Scroll to Top Button-->
+	<th:block th:insert="~{fragments/index :: #scroll-to-top}" />
+
+	<!-- Logout Modal-->
+	<th:block th:insert="~{fragments/index :: #logoutModal}" />
+
+	<!-- Bootstrap core JavaScript-->
     <th:block th:insert="~{fragments/index :: body/script}" />
+   	
 </body>
 </html>
