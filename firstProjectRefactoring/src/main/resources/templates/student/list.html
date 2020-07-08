@@ -1,33 +1,33 @@
 <!DOCTYPE html>
 <html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
-<head th:replace="~{fragments/index :: head}" />
+<head th:replace="~{/fragments/index :: head}" />
 <body id="page-top">
 	
 	<!-- Page Wrapper -->
 	<div id="wrapper">
 	
 		<!-- Sidebar -->
-		<th:block th:insert="~{fragments/index :: #accordionSidebar}" />
+		<th:block th:insert="~{/fragments/index :: #accordionSidebar}" />
 		
 		<!-- Content Wrapper -->
     	<div id="content-wrapper" class="d-flex flex-column">
 
 			<!-- Main Content -->
 			<div id="content">
-				<th:block th:insert="~{fragments/index :: .navbar}" />
+				<th:block th:insert="~{/fragments/index :: .navbar}" />
 				
 				<!-- Begin Page Content -->
         		<div class="container-fluid">
         			
         			<!-- Page Heading -->
-					<th:block th:insert="~{fragments/index :: heading(title='Student\'s List')}" />
+					<th:block th:insert="~{/fragments/index :: heading(title='Students List')}" />
 				
 					<!-- DataTable -->
 					<div class="card shadow mb-4">
 						<div class="card-header py-3">
 							<div class="row">
 								<div class="col-6 my-auto">
-									<h6 class="m-0 font-weight-bold text-primary">Listing Student Domain</h6>
+									<h6 class="m-0 font-weight-bold text-primary">Listing Student Domain's</h6>
 								</div>
 								<div class="col-6 my-auto">
 									<a th:href="@{/student/create}" class="btn btn-primary btn-icon-split btn-sm float-right">
@@ -94,13 +94,13 @@
 	<!-- End of Page Wrapper -->
 	
 	<!-- Scroll to Top Button-->
-	<th:block th:insert="~{fragments/index :: #scroll-to-top}" />
+	<th:block th:insert="~{/fragments/index :: #scroll-to-top}" />
 
 	<!-- Logout Modal-->
-	<th:block th:insert="~{fragments/index :: #logoutModal}" />
+	<th:block th:insert="~{/fragments/index :: #logoutModal}" />
 
 	<!-- Bootstrap core JavaScript-->
-    <th:block th:insert="~{fragments/index :: body/script}" />
+    <th:block th:insert="~{/fragments/index :: body/script}" />
    	
 </body>
 </html>

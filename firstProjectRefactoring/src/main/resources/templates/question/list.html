@@ -1,35 +1,103 @@
 <!DOCTYPE html>
 <html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-	<th:block th:insert="~{fragments/index :: head/meta}" />
-	<title>List Student</title>
-	<th:block th:insert="~{fragments/index :: head/link}" />
-	<th:block th:insert="~{fragments/index :: head/script}" />
-</head>
-<body>
-	<th:block th:insert="~{fragments/index :: body/nav}" />
-	<th:block th:insert="~{fragments/index :: body/header}" />
-    <div class="container mt-5 mb-5">
-    	<h1>Listing Question Domain</h1>
-	    <table id="list" class="table table-hover">
-	        <tr>
-	            <th>ID</th>
-	            <th>Description</th>
-	            <th/>
-	        </tr>
-	        <tr th:each="questionDomain: ${questionDomainList}">
-	            <td th:text="${questionDomain.id}"></td>
-	            <td th:text="${questionDomain.description}"></td>
-	            <td>
-	            	<a th:href="@{/question/update/{id}(id=${questionDomain.id})}">UPDATE</a>
-	            	<a th:href="@{/question/delete/{id}(id=${questionDomain.id})}">DELETE</a>
-	            </td>
-	        </tr>
-	    </table>
-	    <a th:href="@{/question/create}"><button>CREATE NEW QUESTION</button></a>
-    </div>
-	<th:block th:insert="~{fragments/index :: body/footer}" />
-	<th:block th:insert="~{fragments/index :: copyright}" />
-    <th:block th:insert="~{fragments/index :: body/script}" />
+<head th:replace="~{/fragments/index :: head}" />
+<body id="page-top">
+	
+	<!-- Page Wrapper -->
+	<div id="wrapper">
+	
+		<!-- Sidebar -->
+		<th:block th:insert="~{/fragments/index :: #accordionSidebar}" />
+		
+		<!-- Content Wrapper -->
+    	<div id="content-wrapper" class="d-flex flex-column">
+
+			<!-- Main Content -->
+			<div id="content">
+				<th:block th:insert="~{/fragments/index :: .navbar}" />
+				
+				<!-- Begin Page Content -->
+        		<div class="container-fluid">
+        			
+        			<!-- Page Heading -->
+					<th:block th:insert="~{/fragments/index :: heading(title='Questions List')}" />
+				
+					<!-- DataTable -->
+					<div class="card shadow mb-4">
+						<div class="card-header py-3">
+							<div class="row">
+								<div class="col-6 my-auto">
+									<h6 class="m-0 font-weight-bold text-primary">Listing Question Domain's</h6>
+								</div>
+								<div class="col-6 my-auto">
+									<a th:href="@{/question/create}" class="btn btn-primary btn-icon-split btn-sm float-right">
+										<span class="text">Create New Question</span>
+									</a>
+								</div>
+							</div>
+						</div>
+						<div class="card-body">
+							<div class="table-responsive">
+								<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+									<thead>
+										<tr>
+											<th>ID</th>
+											<th>Description</th>
+											<th />
+										</tr>
+									</thead>
+									<tfoot>
+										<tr>
+											<th>ID</th>
+											<th>Description</th>
+											<th />
+										</tr>
+									</tfoot>
+									<tbody>
+										<tr th:each="questionDomain: ${questionDomainList}">
+											<td th:text="${questionDomain.id}"></td>
+								            <td th:text="${questionDomain.description}"></td>
+											<td>
+												<a title="teste" th:href="@{/question/update/{id}(id=${questionDomain.id})}" class="btn btn-info btn-circle btn-sm">
+													<i class="fas fa-info-circle"></i>
+												</a>
+												<span>     </span>
+												<a th:href="@{/question/delete/{id}(id=${questionDomain.id})}" class="btn btn-danger btn-circle btn-sm">
+													<i class="fas fa-trash"></i>
+												</a>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<!-- End of DataTables -->	
+				
+				</div>
+				<!-- /.container-fluid -->
+				
+			</div>
+			<!-- End of Main Content -->
+			
+			<!-- Footer -->
+			<th:block th:insert="~{fragments/index :: footer}" />
+			<!-- End of Footer -->
+			
+		</div>
+		<!-- End of Content Wrapper -->
+		
+	</div>
+	<!-- End of Page Wrapper -->
+	
+	<!-- Scroll to Top Button-->
+	<th:block th:insert="~{/fragments/index :: #scroll-to-top}" />
+
+	<!-- Logout Modal-->
+	<th:block th:insert="~{/fragments/index :: #logoutModal}" />
+
+	<!-- Bootstrap core JavaScript-->
+    <th:block th:insert="~{/fragments/index :: body/script}" />
+   	
 </body>
 </html>
