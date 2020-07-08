@@ -3,15 +3,19 @@ package br.com.devjony.firstprojectrefactoring.domain;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
-public class User implements UserDetails, Serializable {
+public class UserDomain implements UserDetails, Serializable {
 
 	/**
 	 * 
@@ -19,32 +23,42 @@ public class User implements UserDetails, Serializable {
 	private static final long serialVersionUID = -4260447475889917665L;
 	
 	@Id
-	private String userLogin;
-	private String userName;
+	private String login;
+	private String name;
 	private String userPassword;
 	
-	public String getUserLogin() {
-		return userLogin;
+	@ManyToMany
+	@JoinTable(
+			name = "users_roles",
+			joinColumns = @JoinColumn(
+					name = "user_id", referencedColumnName = "login"),
+			inverseJoinColumns = @JoinColumn(
+					name = "role_id", referencedColumnName = "roleName")
+			)
+	private List<Role> roles;
+
+	public String getLogin() {
+		return login;
 	}
 	
-	public void setUserLogin(String userLogin) {
-		this.userLogin = userLogin;
+	public void setLogin(String login) {
+		this.login = login;
 	}
 	
-	public String getUserName() {
-		return userName;
+	public String getName() {
+		return name;
 	}
 	
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	public String getUserPassword() {
-		return userPassword;
+		return this.userPassword;
 	}
-
-	public void setUserPassword(String userPassword) {
-		this.userPassword = userPassword;
+	
+	public void setUserPassword(String password) {
+		this.userPassword = password;
 	}
 
 	@Override
@@ -59,7 +73,7 @@ public class User implements UserDetails, Serializable {
 
 	@Override
 	public String getUsername() {
-		return this.userLogin;
+		return this.login;
 	}
 
 	@Override

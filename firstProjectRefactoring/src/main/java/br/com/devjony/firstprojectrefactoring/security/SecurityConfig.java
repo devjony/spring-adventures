@@ -1,7 +1,6 @@
 package br.com.devjony.firstprojectrefactoring.security;
 
-import java.util.concurrent.ExecutionException;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -9,8 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @EnableWebSecurity
@@ -20,15 +18,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private static String[] PUBLIC_MATCHERS = {"/h2-console/**"};
 	private static String[] PUBLIC_MATCHERS_GET = {};
 	
-	// definindo configurações de permissão
+	@Autowired
+	private CurrentUserDetailsService userDetailsService;
+	
+	// define confuguration permissions
 	protected void configure (HttpSecurity http) throws Exception {
 		
 		http.authorizeRequests()
-			.antMatchers(PUBLIC_MATCHERS).permitAll() // autorização para todos endpoints estiverem no array
-			.antMatchers(HttpMethod.GET, PUBLIC_MATCHERS_GET).permitAll() // autorização para requests GET
-			.anyRequest().authenticated() //autentica todo o restante
+			.antMatchers(PUBLIC_MATCHERS).permitAll() // enable access to all end points in array
+			.antMatchers(HttpMethod.GET, PUBLIC_MATCHERS_GET).permitAll() // enable GET requests
+			.anyRequest().authenticated() //enable everything else
 			.and().formLogin().permitAll()
-			// ao sair direciona para logout
+			// redirect to logout page on logoff
 			.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
 	}
 	
@@ -37,9 +38,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		web.ignoring().antMatchers("/css/**", "/js/**");
 	}
 	
+	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-		auth.inMemoryAuthentication()
-			.withUser("admin").password(encoder.encode("123")).roles("ADMIN");
+		auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
 	}
 }
