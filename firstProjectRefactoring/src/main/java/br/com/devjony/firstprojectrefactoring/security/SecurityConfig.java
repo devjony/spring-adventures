@@ -15,22 +15,40 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
-	private static String[] PUBLIC_MATCHERS = {"/h2-console/**"};
-	private static String[] PUBLIC_MATCHERS_GET = {};
+	private static String[] PUBLIC_MATCHERS = {"/h2-console/**", "/student/create", "/question/create"};
+	private static String[] PUBLIC_MATCHERS_GET = {"/welcome"};
 	
 	@Autowired
 	private CurrentUserDetailsService userDetailsService;
 	
 	// define confuguration permissions
 	protected void configure (HttpSecurity http) throws Exception {
-		
+
+		// define confuguration permissions	
 		http.authorizeRequests()
-			.antMatchers(PUBLIC_MATCHERS).permitAll() // enable access to all end points in array
-			.antMatchers(HttpMethod.GET, PUBLIC_MATCHERS_GET).permitAll() // enable GET requests
-			.anyRequest().authenticated() //enable everything else
-			.and().formLogin().permitAll()
+			// enable GET requests
+			.antMatchers(HttpMethod.GET, PUBLIC_MATCHERS_GET).permitAll()
+			
+			// enable everything to users has this role
+			.antMatchers(PUBLIC_MATCHERS).hasRole("ADMIN")
+			
+			// enable these endpoints to users has this role
+			.antMatchers("/answer").hasRole("USER")
+			.antMatchers("/answer").hasAnyAuthority("INSERT")
+			
+			// everything there aren't in PUBLIC_MATCHERS needs to be authenticated
+			.anyRequest().authenticated()
+			
+				.and().formLogin().permitAll()
+				.loginProcessingUrl("/signin")
+				.loginPage("/welcome").permitAll()
+				.usernameParameter("userNameField")
+				.passwordParameter("passwordField")
+				.defaultSuccessUrl("/index", true)
+				.permitAll()
+			
 			// redirect to logout page on logoff
-			.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
+			.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/welcome");
 	}
 	
 	@Override

@@ -5,13 +5,17 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import org.hibernate.annotations.Fetch;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
@@ -27,7 +31,8 @@ public class UserDomain implements UserDetails, Serializable {
 	private String name;
 	private String userPassword;
 	
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@Fetch(org.hibernate.annotations.FetchMode.SUBSELECT)
 	@JoinTable(
 			name = "users_roles",
 			joinColumns = @JoinColumn(
@@ -36,7 +41,17 @@ public class UserDomain implements UserDetails, Serializable {
 					name = "role_id", referencedColumnName = "roleName")
 			)
 	private List<Role> roles;
-
+	
+	@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@Fetch(org.hibernate.annotations.FetchMode.SUBSELECT)
+	@JoinTable(
+			name = "users_permissions",
+			joinColumns = @JoinColumn(
+					name = "Puser_id", referencedColumnName = "login"),
+			inverseJoinColumns = @JoinColumn(
+					name = "Prole_id", referencedColumnName = "permissionName"))
+	private List<Permission> permissions;
+	
 	public String getLogin() {
 		return login;
 	}
@@ -60,10 +75,41 @@ public class UserDomain implements UserDetails, Serializable {
 	public void setUserPassword(String password) {
 		this.userPassword = password;
 	}
+	
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
+	
+	public List<Permission> getPermissions() {
+		return permissions;
+	}
+	
+	public void setPermissions(List<Permission> permissions) {
+		this.permissions = permissions;
+	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return new ArrayList<>();
+		
+		List<GrantedAuthority> authorities = new ArrayList<>();
+		
+		// Extract list of permissions (name)
+		this.permissions.forEach(p -> {
+			GrantedAuthority authority = new SimpleGrantedAuthority(p.getPermissionName());
+			authorities.add(authority);
+		});
+		
+		// Extract list of roles (ROLE_NAME)
+		this.roles.forEach(r -> {
+			GrantedAuthority authority = new SimpleGrantedAuthority(r.getRoleName());
+			authorities.add(authority);
+		});
+		
+		return authorities;
 	}
 
 	@Override
