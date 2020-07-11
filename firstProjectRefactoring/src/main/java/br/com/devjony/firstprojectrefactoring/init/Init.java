@@ -1,73 +1,72 @@
 package br.com.devjony.firstprojectrefactoring.init;
 
-import br.com.devjony.firstprojectrefactoring.domain.QuestionDomain;
-import br.com.devjony.firstprojectrefactoring.domain.StudentDomain;
-import br.com.devjony.firstprojectrefactoring.service.QuestionService;
-import br.com.devjony.firstprojectrefactoring.service.StudentService;
+import br.com.devjony.firstprojectrefactoring.domain.Permission;
+import br.com.devjony.firstprojectrefactoring.domain.Role;
+import br.com.devjony.firstprojectrefactoring.domain.UserDomain;
+import br.com.devjony.firstprojectrefactoring.repository.PermissionRepository;
+import br.com.devjony.firstprojectrefactoring.repository.RoleRepository;
+import br.com.devjony.firstprojectrefactoring.repository.UserRepository;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
 public class Init implements ApplicationListener<ContextRefreshedEvent> {
 
-    Logger logger = LoggerFactory.getLogger(Init.class);
-
     @Autowired
-    private StudentService studentService;
+    UserRepository userRepository;
     
     @Autowired
-    private QuestionService questionService;
+    RoleRepository roleRepository;
+    
+    @Autowired
+    PermissionRepository permissionRepository;
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
-        logger.info("Starting saving mock values on database");
 
-        StudentDomain student = new StudentDomain();
-        student.setName("Student Name");
-        student.setEmail("student@email.com");
-        student.setPassword("1234");
-        studentService.save(student);
-        
-        StudentDomain student2 = new StudentDomain();
-        student2.setName("Student Name 2");
-        student2.setEmail("student2@email.com");
-        student2.setPassword("1234");
-        studentService.save(student2);
-        
-        StudentDomain student3 = new StudentDomain();
-        student3.setName("Student Name 3");
-        student3.setEmail("student3@email.com");
-        student3.setPassword("1234");
-        studentService.save(student3);
-        
-        StudentDomain student4 = new StudentDomain();
-        student4.setName("Student Name 4");
-        student4.setEmail("student4@email.com");
-        student4.setPassword("1234");
-        studentService.save(student4);
-        
-        QuestionDomain question = new QuestionDomain();
-        question.setDescription("Pergunta de número 1");
-        questionService.save(question);
-        
-        QuestionDomain question2 = new QuestionDomain();
-        question2.setDescription("Pergunta de número 2");
-        questionService.save(question2);
-        
-        QuestionDomain question3 = new QuestionDomain();
-        question3.setDescription("Pergunta de número 3");
-        questionService.save(question3);
-        
-        QuestionDomain question4 = new QuestionDomain();
-        question4.setDescription("Pergunta de número 4");
-        questionService.save(question4);
-        
-        logger.info("Finishing saving mock values on database");
+    	UserDomain userDomain = new UserDomain();
+    	userDomain.setLogin("admin");
+    	userDomain.setName("Administrator");
+    	userDomain.setUserPassword(new BCryptPasswordEncoder().encode("1234"));
+    	
+    	Role roleAdmin = new Role();
+    	roleAdmin.setRoleName("ROLE_ADMIN");
+    	roleRepository.save(roleAdmin);
+    	
+    	userDomain.setRoles(Arrays.asList(roleAdmin));
+    	userRepository.save(userDomain);
+    	
+    	UserDomain user2 = new UserDomain();
+    	user2.setLogin("user");
+    	user2.setName("User");
+    	user2.setUserPassword(new BCryptPasswordEncoder().encode("1234"));
+    	
+    	Role roleUser = new Role();
+    	roleUser.setRoleName("ROLE_USER");
+    	
+    	Permission userPermission = new Permission();
+    	userPermission.setPermissionName("INSERT");
+    	
+    	permissionRepository.save(userPermission);
+    	roleRepository.save(roleUser);
+
+    	user2.setRoles(Arrays.asList(roleUser));
+    	user2.setPermissions(Arrays.asList(userPermission));
+    	userRepository.save(user2);
+    	
+    	UserDomain user3 = new UserDomain();
+    	user3.setLogin("salvato");
+    	user3.setName("Sara");
+    	user3.setUserPassword(new BCryptPasswordEncoder().encode("1234"));
+    	
+    	user3.setRoles(Arrays.asList(roleUser, roleAdmin));
+    	
+    	userRepository.save(user3);
     }
-
 }

@@ -17,7 +17,7 @@ public class LoginController {
 	@Autowired
 	private LoginService loginService;
 	
-	@GetMapping("/login")
+	@GetMapping("/welcome")
 	public ModelAndView login() {
 		ModelAndView mv = new ModelAndView("/login");
 		mv.addObject("student", new StudentDomain());
